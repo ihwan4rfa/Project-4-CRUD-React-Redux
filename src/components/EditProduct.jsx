@@ -12,6 +12,7 @@ const EditProduct = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const product = useSelector((state) => productSelectors.selectById(state, id));
+    const isDark = useSelector((state) => state.theme.isDark);
 
     useEffect(() => {
         dispatch(getProducts())
@@ -38,7 +39,7 @@ const EditProduct = () => {
     return (
         <>
             <Navbar />
-            <div className='h-screen px-20 pt-20 bg-white dark:bg-slate-900'>
+            <div className={`h-screen px-20 pt-20 ${isDark ? 'dark:bg-slate-900' : 'bg-white'}`}>
                 <div className='flex items-center justify-between'>
                     <h1 className='my-2 text-2xl font-medium dark:text-white'>Add New Product</h1>
                 </div>

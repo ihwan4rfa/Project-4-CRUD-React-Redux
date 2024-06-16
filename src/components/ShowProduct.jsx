@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getProducts, productSelectors, deleteProduct } from '../redux/slices/productSlice';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
+import Dropdown from './DropDown';
 
 const ShowProduct = () => {
 
     const dispatch = useDispatch();
     const products = useSelector(productSelectors.selectAll);
     const isDark = useSelector((state) => state.theme.isDark);
+    const [selectedOption2, setSelectedOption2] = useState('lastAdded');
+    const sortLastAdded = [...products].reverse();
 
     useEffect(() => {
         dispatch(getProducts())
@@ -19,10 +22,13 @@ const ShowProduct = () => {
             <Navbar />
             <div className={`h-screen px-20 pt-20 ${isDark ? 'dark:bg-slate-900 dark-scroll' : 'bg-white'}`}>
                 <div className='flex items-center justify-between'>
-                    <h1 className='my-2 text-2xl font-medium dark:text-white'>Products</h1>
+                    <div>
+                        <h1 className='my-2 text-2xl font-medium dark:text-white'>Products</h1>
+                        <Dropdown selectedOption2={selectedOption2} setSelectedOption2={setSelectedOption2} />
+                    </div>
                     <Link to='add' className='px-3 py-[8px] text-[13px] text-white bg-teal-600 hover:bg-teal-700 rounded-lg'><i className="mr-2 fa-solid fa-plus"></i>New Product</Link>
                 </div>
-                <div className='overflow-y-auto h-[80%] mt-5'>
+                <div className='overflow-y-auto h-[75%] mt-5'>
                     <table className='text-[13px] font-medium w-full'>
                         <thead className='sticky top-0 bg-slate-100 dark:bg-slate-800'>
                             <tr className='text-left text-slate-500 dark:text-slate-400'>
@@ -33,7 +39,7 @@ const ShowProduct = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map((product, index) => (
+                            {(selectedOption2 === 'lastAdded' ? sortLastAdded : products).map((product, index) => (
                                 <tr className='border-b-2 border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-400' key={product.id}>
                                     <td className='px-4 py-2'>{index + 1}</td>
                                     <td className='px-4 py-2'>{product.name}</td>

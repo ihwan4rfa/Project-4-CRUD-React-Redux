@@ -41,7 +41,7 @@ const EditProduct = () => {
             <Navbar />
             <div className={`h-screen px-20 pt-20 ${isDark ? 'dark:bg-slate-900' : 'bg-white'}`}>
                 <div className='flex items-center justify-between'>
-                    <h1 className='my-2 text-2xl font-medium dark:text-white'>Add New Product</h1>
+                    <h1 className='my-2 text-2xl font-medium dark:text-white'>Edit Product</h1>
                 </div>
                 <form className='mt-5' onSubmit={handleUpdate}>
                     <div className='flex w-full gap-8'>

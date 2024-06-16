@@ -59,6 +59,11 @@
       "id": "b843",
       "name": "Product 20",
       "price": 200000
+    },
+    {
+      "id": "9404",
+      "name": "Product 28",
+      "price": "28000"
     }
   ]
 }
